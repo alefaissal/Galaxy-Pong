@@ -14,15 +14,32 @@ export default class Paddle {
         document.addEventListener("keydown", event => {
             switch (event.key) {
                 case up:
-                    console.log("up");
+                    this.up();
                     break;
                 case down:
-                    console.log("down");
+                    this.down();
                     break;
             }
         });
 
     }
+
+    up() {
+        if (!this.y <= 0) {
+            console.log('move up');
+            this.y = this.y - this.speed;
+        }
+        // this.y = Math.max(0, this.y - this.speed); /// another way to do it
+    }
+    down() {
+        if (!(this.y >= (this.boardHeight - this.height))) {
+            console.log("move down");
+            this.y = this.y + this.speed;
+        }
+        // this.y = Math.min(this.y + this.speed, this.boardHeight - this.height);
+
+    }
+
     render(svg) {
         let rect = document.createElementNS(SVG_NS, 'rect');
         rect.setAttributeNS(null, 'fill', this.colour);
