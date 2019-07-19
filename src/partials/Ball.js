@@ -110,10 +110,24 @@ export default class Ball {
         if (rightGoal) {
             this.goal(player1);
             this.direction = 1;
+            if (player2.height >= 10) {
+                player2.height -= 5;
+            }
+            if (player1.height <= 100) {
+                player1.height += 5;
+            }
+
 
         } else if (leftGoal) {
             this.goal(player2);
             this.direction = -1;
+            if (player1.height >= 20) {
+                player1.height -= 10;
+            }
+            if (player2.height <= 200) {
+                player2.height += 10;
+            }
+
         }
     }
 

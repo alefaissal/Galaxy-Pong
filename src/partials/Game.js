@@ -73,25 +73,33 @@ export default class Game {
   }
 
   render() {
-
-    if (this.pause) {
-      return;
+    if (this.player1.score === 10) {
+      alert("GAME OVER Player One wins!! Refresh the page to play again");
     }
+    if (this.player2.score === 10) {
+      alert("GAME OVER Player Two wins!! Refresh the page to play again");
+    } else {
 
-    this.gameElement.innerHTML = ''; // clear the html before appending to fix a render bug 🐞
-    let svg = document.createElementNS(SVG_NS, "svg");
-    svg.setAttributeNS(null, "width", this.width);
-    svg.setAttributeNS(null, "height", this.height);
-    svg.setAttributeNS(null, "viewBox", `0 0 ${this.width} ${this.height}`);
-    this.gameElement.appendChild(svg);
-    this.board.render(svg);
-    this.player1.render(svg);
-    this.player2.render(svg);
-    this.ball.render(svg, this.player1, this.player2);
-    this.showBallXY(svg, this.ball);
-    this.score1.render(svg, this.player1.score);
-    this.score2.render(svg, this.player2.score);
+      if (this.pause) {
+        return;
+      }
 
+      this.gameElement.innerHTML = ''; // clear the html before appending to fix a render bug 🐞
+      let svg = document.createElementNS(SVG_NS, "svg");
+      svg.setAttributeNS(null, "width", this.width);
+      svg.setAttributeNS(null, "height", this.height);
+      svg.setAttributeNS(null, "viewBox", `0 0 ${this.width} ${this.height}`);
+      this.gameElement.appendChild(svg);
+      this.board.render(svg);
+      this.player1.render(svg);
+      this.player2.render(svg);
+      this.ball.render(svg, this.player1, this.player2);
+      this.showBallXY(svg, this.ball);
+      this.score1.render(svg, this.player1.score);
+      this.score2.render(svg, this.player2.score);
+
+
+    }
   }
 
 

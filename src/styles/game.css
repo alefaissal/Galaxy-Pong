@@ -155,12 +155,18 @@ table {
 
 html {
   font-size: 16px;
-  /* background:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%),
-        url(../i) no-repeat center 70px,
-    background-size: cover, contain;
-    padding: 150px 60px 180px 60px;
-    color: white; */
+  /* .space-scroller { */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  background-image: url("http://testinggrounds.info/game-art/space.jpg");
+  background-repeat: repeat-x;
+  animation: spaceScroller 10s linear infinite;
+  background-color: black;
+  /* } */
 }
 
 body {
@@ -170,6 +176,7 @@ body {
   height: 100vh;
   justify-content: center;
   width: 100%;
+  color: white;
 }
 
 h1 {
@@ -186,4 +193,14 @@ h2 {
 
 p {
   text-align: center;
+}
+
+@keyframes spaceScroller {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -1000px 0;
+  }
 }
