@@ -2,6 +2,7 @@ import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
 import PowerUp from './PowerUp';
+import Score from './Score';
 import { SVG_NS, KEYS } from "../settings";
 
 export default class Game {
@@ -41,6 +42,12 @@ export default class Game {
       KEYS.up,
       KEYS.down
     );
+
+    // this.score1 = new Score(this.width / 2 - 60, 50, 40, 'skyblue');
+    // this.score2 = new Score(this.width / 2 + 30, 50, 40, 'skyblue');
+
+    this.score1 = new Score(this.width / 4 - 40, this.height / 2 + 40, 150, 'skyblue');
+    this.score2 = new Score(3 * this.width / 4 - 40, this.height / 2 + 40, 150, 'skyblue');
 
     this.ball = new Ball(this.ballRadius, this.board.width, this.board.height, 'grey');
 
@@ -82,6 +89,9 @@ export default class Game {
     this.player2.render(svg);
     this.ball.render(svg, this.player1, this.player2);
     this.showBallXY(svg, this.ball);
+    this.score1.render(svg, this.player1.score);
+    this.score2.render(svg, this.player2.score);
+
   }
 
 

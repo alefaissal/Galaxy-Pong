@@ -1,7 +1,8 @@
 import { SVG_NS } from "../settings";
 import Board from "./Board";
 import Game from "./Game";
-import { runInThisContext } from "vm";
+import pingSound from "../../public/sounds/pong-01.wav";
+import pingSound2 from "../../public/sounds/pong-02.wav";
 //import { runInThisContext } from "vm";
 
 export default class Ball {
@@ -17,6 +18,8 @@ export default class Ball {
         this.finalX;
         this.finalY;
 
+        this.ping = new Audio(pingSound);
+
     }
 
     reset() {
@@ -25,10 +28,14 @@ export default class Ball {
 
         this.vy = 0;
         while (this.vy === 0) {
-            this.vy = (Math.floor(Math.random() * 10 - 5)) * (this.boardWidth / 512);  // can take the Math.floor off 
+            this.vy = (Math.floor(Math.random() * 10 - 5));  // can take the Math.floor off 
         }
         console.log("vy", this.vy);
+
+        // this.vx = 0;
+        // while (this.vx === 0) {
         this.vx = (this.direction * (6 - Math.abs(this.vy))) * (this.boardWidth / 512);
+        // }
         console.log("vx", this.vx);
 
         this.finalX = this.x;
@@ -58,11 +65,13 @@ export default class Ball {
                 if (this.x + this.radius >= player2.x &&
                     this.x + this.radius <= player2.x + player2.width) {
                     this.vx = -this.vx;
+                    this.ping.play();
                 }
             } else {
                 if (this.x - this.radius <= player1.x + player1.width &&
                     this.x - this.radius >= player1.x) {
                     this.vx = -this.vx;
+                    this.ping.play();
                 }
             }
         }
@@ -71,13 +80,12 @@ export default class Ball {
 
     }
 
-    getBallX() {
-        return this.x;
-    }
-    getBallY() {
-        return this.y;
-    }
+    goal(player) {
+        player.score++;
+        this.reset();
 
+        console.log(player.score);
+    }
 
     render(svg, player1, player2) {
 
@@ -94,6 +102,19 @@ export default class Ball {
         circle.setAttributeNS(null, 'cx', this.x);
         circle.setAttributeNS(null, 'cy', this.y);
         svg.appendChild(circle);
+
+
+        const rightGoal = this.x + this.radius >= this.boardWidth;
+        const leftGoal = this.x - this.radius <= 0;
+
+        if (rightGoal) {
+            this.goal(player1);
+            this.direction = 1;
+
+        } else if (leftGoal) {
+            this.goal(player2);
+            this.direction = -1;
+        }
     }
 
 
