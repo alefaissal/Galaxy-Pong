@@ -14,9 +14,9 @@ export default class Game {
     this.gameElement = document.getElementById(this.element);
     this.board = new Board(this.width, this.height);
 
-    this.paddleWidth = 8 * (width / this.width); /// think about this more.
-    this.paddleHeight = 56 * (width / this.width);
-    this.boardGap = 10 * (width / this.width);
+    this.paddleWidth = 8 * (width / 512); /// think about this more.
+    this.paddleHeight = 56 * (width / 512);
+    this.boardGap = 10 * (width / 512);
 
     this.ballRadius = 8;
 
@@ -57,6 +57,14 @@ export default class Game {
 
 
 
+
+  showBallXY(ball) {
+    ball = this.ball;
+    let text = document.getElementById("ballXY");
+    text.innerHTML = "Ball X = " + ball.finalX + " Ball Y = " + ball.finalY;
+
+  }
+
   render() {
 
     if (this.pause) {
@@ -72,6 +80,11 @@ export default class Game {
     this.board.render(svg);
     this.player1.render(svg);
     this.player2.render(svg);
-    this.ball.render(svg);
+    this.ball.render(svg, this.player1, this.player2);
+    this.showBallXY(svg, this.ball);
   }
+
+
+
+
 }

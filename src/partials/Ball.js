@@ -1,6 +1,7 @@
 import { SVG_NS } from "../settings";
 import Board from "./Board";
 import Game from "./Game";
+import { runInThisContext } from "vm";
 //import { runInThisContext } from "vm";
 
 export default class Ball {
@@ -12,6 +13,9 @@ export default class Ball {
         this.colour = colour;
 
         this.reset();
+
+        this.finalX;
+        this.finalY;
 
     }
 
@@ -26,6 +30,8 @@ export default class Ball {
         console.log("vy", this.vy);
         this.vx = this.direction * (6 - Math.abs(this.vy));
         console.log("vx", this.vx);
+        this.finalX = this.x;
+        this.finalY = this.y;
     }
 
     wallCollision() {
@@ -39,17 +45,47 @@ export default class Ball {
         } else if (hitTop || hitBottom) {
             this.vy *= -1;        // should keep in the same way before, but just for teaching purpose.
         }
+
+        this.finalX = this.x;
+        this.finalY = this.y;
+    }
+
+    paddleCollision(player1, player2) {
+        if ((this.y >= player2.y && this.y <= player2.y + player2.height) ||
+            (this.y >= player1.y && this.y <= player1.y + player2.height)) {
+            if (this.vx > 0) {
+                if (this.x + this.radius >= player2.x &&
+                    this.x + this.radius <= player2.x + player2.width) {
+                    this.vx = -this.vx;
+                }
+            } else {
+                if (this.x - this.radius <= player1.x + player1.width &&
+                    this.x - this.radius >= player1.x) {
+                    this.vx = -this.vx;
+                }
+            }
+        }
+        this.finalX = this.x;
+        this.finalY = this.y;
+
+    }
+
+    getBallX() {
+        return this.x;
+    }
+    getBallY() {
+        return this.y;
     }
 
 
-
-    render(svg) {
+    render(svg, player1, player2) {
 
         this.x += this.vx;
         this.y += this.vy;
 
 
         this.wallCollision();
+        this.paddleCollision(player1, player2);
 
         let circle = document.createElementNS(SVG_NS, 'circle');
         circle.setAttributeNS(null, 'fill', this.colour);
