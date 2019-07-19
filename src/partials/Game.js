@@ -103,11 +103,11 @@ export default class Game {
   }
 
   render() {
-    if (this.player1.score === 5) {
+    if (this.player1.score === 10) {
       alert("GAME OVER Player One wins!! Refresh the page to play again");
       window.location.reload();
     }
-    if (this.player2.score === 5) {
+    if (this.player2.score === 10) {
       alert("GAME OVER Player Two wins!! Refresh the page to play again");
       window.location.reload();
     } else {
