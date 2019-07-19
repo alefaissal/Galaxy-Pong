@@ -5,7 +5,11 @@ export const KEYS = {
     z: "z",        // player 1 down key
     up: "ArrowUp",       // player 2 up key
     down: "ArrowDown",     // player 2 down key
-    spaceBar: " ", // we'll use this later...
+    spaceBar: " ", // Pause the game
+    c: "c",        // change the ball
+    b: "b",        // change the ball back
+    m: "m",       // create multiple ball
+    n: "n",       // take away multiple ball
 };
 
 // With this option you need to change in Paddle,

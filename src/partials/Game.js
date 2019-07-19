@@ -21,6 +21,9 @@ export default class Game {
 
     this.ballRadius = 6 * (width / 512);
 
+    this.multiBallArray = [];         // multiball
+    this.isMultiBall = false;   // multiball
+
     this.player1 = new Paddle(
       this.height,
       this.paddleWidth,
@@ -43,8 +46,6 @@ export default class Game {
       KEYS.down
     );
 
-    // this.score1 = new Score(this.width / 2 - 60, 50, 40, 'skyblue');
-    // this.score2 = new Score(this.width / 2 + 30, 50, 40, 'skyblue');
 
     this.score1 = new Score(this.width / 4 - 40, this.height / 2 + 40, 150, 'skyblue');
     this.score2 = new Score(3 * this.width / 4 - 40, this.height / 2 + 40, 150, 'skyblue');
@@ -56,6 +57,27 @@ export default class Game {
         case KEYS.spaceBar:
           this.pause = !this.pause;
           break;
+
+        case KEYS.c:
+          this.ball = new Ball(this.ballRadius + 10, this.board.width, this.board.height, 'red');
+          this.player1.height = 26 * (width / 512);
+          this.player2.height = 26 * (width / 512);
+          break;
+
+        case KEYS.b:
+          this.ball = new Ball(this.ballRadius, this.board.width, this.board.height, 'grey');
+          this.player1.height = 56 * (width / 512);
+          this.player2.height = 56 * (width / 512);
+          break;
+
+        case KEYS.m:
+          this.multiBall();
+          break;
+
+        case KEYS.n:
+          this.isMultiBall = false;
+          break;
+
       }
     });
 
@@ -63,6 +85,14 @@ export default class Game {
   }// end of constructor
 
 
+
+  multiBall() {
+    this.isMultiBall = true;                  // multiball
+    for (let i = 0; i <= 20; i++) {
+      this.multiBallArray[i] = new Ball(15, this.board.width, this.board.height, 'white');
+    }
+    console.log(this.multiBallArray);
+  }
 
 
   showBallXY(ball) {
@@ -73,11 +103,13 @@ export default class Game {
   }
 
   render() {
-    if (this.player1.score === 10) {
+    if (this.player1.score === 5) {
       alert("GAME OVER Player One wins!! Refresh the page to play again");
+      window.location.reload();
     }
-    if (this.player2.score === 10) {
+    if (this.player2.score === 5) {
       alert("GAME OVER Player Two wins!! Refresh the page to play again");
+      window.location.reload();
     } else {
 
       if (this.pause) {
@@ -97,6 +129,13 @@ export default class Game {
       this.showBallXY(svg, this.ball);
       this.score1.render(svg, this.player1.score);
       this.score2.render(svg, this.player2.score);
+
+      // multiball
+      if (this.isMultiBall) {
+        this.multiBallArray.forEach(ball => {
+          ball.render(svg, this.player1, this.player2);
+        });
+      }
 
 
     }
