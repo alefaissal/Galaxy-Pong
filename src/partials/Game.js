@@ -18,7 +18,7 @@ export default class Game {
     this.paddleHeight = 56 * (width / 512);
     this.boardGap = 10 * (width / 512);
 
-    this.ballRadius = 8;
+    this.ballRadius = 6 * (width / 512);
 
     this.player1 = new Paddle(
       this.height,

@@ -25,11 +25,12 @@ export default class Ball {
 
         this.vy = 0;
         while (this.vy === 0) {
-            this.vy = Math.floor(Math.random() * 10 - 5);  // can take the Math.floor off 
+            this.vy = (Math.floor(Math.random() * 10 - 5)) * (this.boardWidth / 512);  // can take the Math.floor off 
         }
         console.log("vy", this.vy);
-        this.vx = this.direction * (6 - Math.abs(this.vy));
+        this.vx = (this.direction * (6 - Math.abs(this.vy))) * (this.boardWidth / 512);
         console.log("vx", this.vx);
+
         this.finalX = this.x;
         this.finalY = this.y;
     }
