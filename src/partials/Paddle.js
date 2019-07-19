@@ -1,7 +1,7 @@
-import { SVG_NS } from "../settings";
+import { SVG_NS, KEYS } from "../settings";
 
 export default class Paddle {
-    constructor(boardHeight, width, height, x, y, colour = 'white', up, down) {
+    constructor(boardHeight, width, height, x, y, colour = 'white', upKey, downKey) {
         this.boardHeight = boardHeight;
         this.width = width;
         this.height = height;
@@ -10,29 +10,44 @@ export default class Paddle {
         this.speed = 10;
         this.score = 0;
         this.colour = colour;
+        this.upKey = upKey;
+        this.downKey = downKey;
+
+        this.keyState = {};
 
         document.addEventListener("keydown", event => {
-            switch (event.key) {
-                case up:
-                    this.up();
-                    break;
-                case down:
-                    this.down();
-                    break;
-            }
+            this.keyState[event.key] = true;
         });
+
+        document.addEventListener("keyup", event => {
+            this.keyState[event.key] = false;
+        });
+
+
+
+
+        // document.addEventListener("keydown", event => {
+        //     switch (event.key) {
+        //         case up:
+        //             this.up();
+        //             break;
+        //         case down:
+        //             this.down();
+        //             break;
+        //     }
+        // });
 
     }
 
     up() {
-        if (!this.y <= 0) {
+        if (this.y > 0) {
             console.log('move up');
             this.y = this.y - this.speed;
         }
         // this.y = Math.max(0, this.y - this.speed); /// another way to do it
     }
     down() {
-        if (!(this.y >= (this.boardHeight - this.height))) {
+        if (this.y < (this.boardHeight - this.height)) {
             console.log("move down");
             this.y = this.y + this.speed;
         }
@@ -41,6 +56,21 @@ export default class Paddle {
     }
 
     render(svg) {
+
+        if (this.keyState[KEYS.a] && this.upKey === KEYS.a) {
+            this.up();
+        }
+        if (this.keyState[KEYS.z] && this.downKey === KEYS.z) {
+            this.down();
+        }
+        if (this.keyState[KEYS.up] && this.upKey === KEYS.up) {
+            this.up();
+        }
+        if (this.keyState[KEYS.down] && this.downKey === KEYS.down) {
+            this.down();
+        }
+
+
         let rect = document.createElementNS(SVG_NS, 'rect');
         rect.setAttributeNS(null, 'fill', this.colour);
 
