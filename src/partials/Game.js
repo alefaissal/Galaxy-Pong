@@ -24,7 +24,7 @@ export default class Game {
     this.multiBallArray = [];         // multiball
     this.isMultiBall = false;   // multiball
 
-    this.gameOver = false;
+    this.topScore = 10;
 
     this.player1 = new Paddle(
       this.height,
@@ -93,6 +93,7 @@ export default class Game {
     for (let i = 0; i <= 20; i++) {
       this.multiBallArray[i] = new Ball(15, this.board.width, this.board.height, 'white');
     }
+    this.topScore = 100;
     console.log(this.multiBallArray);
   }
 
@@ -105,13 +106,13 @@ export default class Game {
   }
 
   render() {
-    if (this.player1.score === 10) {
+    if (this.player1.score === this.topScore) {
       alert("GAME OVER" + "\n" +
         "Player One wins!!" + "\n" +
         "Refresh the page to play again");
       window.location.reload();
     }
-    if (this.player2.score === 10) {
+    if (this.player2.score === this.topScore) {
       alert("GAME OVER" + "\n" +
         "Player Two wins!!" + "\n" +
         "Refresh the page to play again");

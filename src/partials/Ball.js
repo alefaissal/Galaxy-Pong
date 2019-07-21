@@ -81,9 +81,7 @@ export default class Ball {
 
     goal(player) {
         player.score++;
-        if (player.score < 10) {
-            this.goalSound.play();
-        }
+        this.goalSound.play();
         this.reset();
         this.direction = -this.direction;
         console.log(player.score);
