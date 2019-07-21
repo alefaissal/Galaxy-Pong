@@ -74,10 +74,18 @@ export default class Game {
 
         case KEYS.m:
           this.multiBall();
+          console.log("top score" + this.topScore);
           break;
 
         case KEYS.n:
           this.isMultiBall = false;
+          if (this.player1.score >= this.player2.score) {
+            this.topScore = this.player1.score + 10;
+            console.log("top score" + this.topScore);
+          } else {
+            this.topScore = this.player2.score + 10;
+          }
+
           break;
 
       }
