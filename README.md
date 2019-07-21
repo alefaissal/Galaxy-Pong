@@ -39,3 +39,15 @@ Once you have done this, you can run:
 `$ npm run deploy`
 
 Now check out your deployed site 🙂
+
+
+## NEW Features of Galaxy Pong
+
+* Deploy multi ball using "m'
+* Finish multi ball using "n"
+* Change type of ball and size of paddles using "c"
+* Change ball and paddle back using "b"
+* As player score, its paddles increase size and the opponent decrease size
+* Game is over when some one reaches 10 points
+* Space bar pause the game at any time
+

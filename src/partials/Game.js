@@ -24,6 +24,8 @@ export default class Game {
     this.multiBallArray = [];         // multiball
     this.isMultiBall = false;   // multiball
 
+    this.gameOver = false;
+
     this.player1 = new Paddle(
       this.height,
       this.paddleWidth,
@@ -104,13 +106,18 @@ export default class Game {
 
   render() {
     if (this.player1.score === 10) {
-      alert("GAME OVER Player One wins!! Refresh the page to play again");
+      alert("GAME OVER" + "\n" +
+        "Player One wins!!" + "\n" +
+        "Refresh the page to play again");
       window.location.reload();
     }
     if (this.player2.score === 10) {
-      alert("GAME OVER Player Two wins!! Refresh the page to play again");
+      alert("GAME OVER" + "\n" +
+        "Player Two wins!!" + "\n" +
+        "Refresh the page to play again");
       window.location.reload();
-    } else {
+    }
+    else {
 
       if (this.pause) {
         return;
@@ -123,9 +130,11 @@ export default class Game {
       svg.setAttributeNS(null, "viewBox", `0 0 ${this.width} ${this.height}`);
       this.gameElement.appendChild(svg);
       this.board.render(svg);
+      this.ball.render(svg, this.player1, this.player2);
+
       this.player1.render(svg);
       this.player2.render(svg);
-      this.ball.render(svg, this.player1, this.player2);
+
       this.showBallXY(svg, this.ball);
       this.score1.render(svg, this.player1.score);
       this.score2.render(svg, this.player2.score);

@@ -155,6 +155,7 @@ table {
 
 html {
   font-size: 16px;
+
   /* .space-scroller { */
   display: flex;
   justify-content: center;
@@ -163,6 +164,7 @@ html {
   height: 100%;
   width: 100%;
   background-image: url("http://testinggrounds.info/game-art/space.jpg");
+  background-size: contain;
   background-repeat: repeat-x;
   animation: spaceScroller 10s linear infinite;
   background-color: black;

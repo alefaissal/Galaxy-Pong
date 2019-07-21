@@ -3,6 +3,7 @@ import Board from "./Board";
 import Game from "./Game";
 import pingSound from "../../public/sounds/pong-01.wav";
 import pingSound2 from "../../public/sounds/pong-02.wav";
+import goal from "../../public/sounds/goal.wav";
 //import { runInThisContext } from "vm";
 
 export default class Ball {
@@ -10,7 +11,7 @@ export default class Ball {
         this.radius = radius;
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
-        this.direction = 1; //used in vx to set the direction to the right
+        this.direction = 1; //used in vx to set/change the direction for start and goal
         this.colour = colour;
 
         this.reset();
@@ -19,7 +20,8 @@ export default class Ball {
         this.finalY;
 
         this.ping = new Audio(pingSound);
-
+        this.ping2 = new Audio(pingSound2);
+        this.goalSound = new Audio(goal);
     }
 
     reset() {
@@ -32,10 +34,8 @@ export default class Ball {
         }
         console.log("vy", this.vy);
 
-        // this.vx = 0;
-        // while (this.vx === 0) {
         this.vx = (this.direction * (6 - Math.abs(this.vy))) * (this.boardWidth / 512);
-        // }
+
         console.log("vx", this.vx);
 
         this.finalX = this.x;
@@ -51,7 +51,7 @@ export default class Ball {
         if (hitLeft || hitRight) {
             this.vx = -this.vx;
         } else if (hitTop || hitBottom) {
-            this.vy *= -1;        // should keep in the same way before, but just for teaching purpose.
+            this.vy *= -1;        // should use the same syntax, but just for learning purpose.
         }
 
         this.finalX = this.x;
@@ -71,19 +71,21 @@ export default class Ball {
                 if (this.x - this.radius <= player1.x + player1.width &&
                     this.x - this.radius >= player1.x) {
                     this.vx = -this.vx;
-                    this.ping.play();
+                    this.ping2.play();
                 }
             }
         }
         this.finalX = this.x;
         this.finalY = this.y;
-
     }
 
     goal(player) {
         player.score++;
+        if (player.score < 10) {
+            this.goalSound.play();
+        }
         this.reset();
-
+        this.direction = -this.direction;
         console.log(player.score);
     }
 
@@ -109,18 +111,14 @@ export default class Ball {
 
         if (rightGoal) {
             this.goal(player1);
-            this.direction = 1;
             if (player2.height >= 10) {
                 player2.height -= 5;
             }
             if (player1.height <= 100) {
                 player1.height += 5;
             }
-
-
         } else if (leftGoal) {
             this.goal(player2);
-            this.direction = -1;
             if (player1.height >= 20) {
                 player1.height -= 10;
             }
