@@ -155,12 +155,9 @@ table {
 
 html {
   font-size: 16px;
-
-  /* .space-scroller { */
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 100%;
   width: 100%;
   background-image: url("http://testinggrounds.info/game-art/space.jpg");
@@ -168,7 +165,6 @@ html {
   background-repeat: repeat-x;
   animation: spaceScroller 10s linear infinite;
   background-color: black;
-  /* } */
 }
 
 body {

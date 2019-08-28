@@ -5,5 +5,4 @@ export default class PowerUp extends Ball {
     constructor(...args) {
         super(...args);
     }
-
 }

@@ -8,8 +8,6 @@ export default class Score {
     this.colour = colour;
   }
 
-
-  //...
   render(svg, score) {
     let text = document.createElementNS(SVG_NS, 'text');
 
@@ -21,7 +19,6 @@ export default class Score {
 
     text.textContent = score;
     svg.appendChild(text);
-
   }
 
 }

@@ -92,7 +92,6 @@ export default class Ball {
         this.x += this.vx;
         this.y += this.vy;
 
-
         this.wallCollision();
         this.paddleCollision(player1, player2);
 
@@ -102,7 +101,6 @@ export default class Ball {
         circle.setAttributeNS(null, 'cx', this.x);
         circle.setAttributeNS(null, 'cy', this.y);
         svg.appendChild(circle);
-
 
         const rightGoal = this.x + this.radius >= this.boardWidth;
         const leftGoal = this.x - this.radius <= 0;
@@ -123,9 +121,6 @@ export default class Ball {
             if (player2.height <= 200) {
                 player2.height += 10;
             }
-
         }
     }
-
-
 }

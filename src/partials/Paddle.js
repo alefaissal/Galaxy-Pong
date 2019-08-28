@@ -12,7 +12,6 @@ export default class Paddle {
         this.colour = colour;
         this.upKey = upKey;
         this.downKey = downKey;
-
         this.keyState = {};
 
         document.addEventListener("keydown", event => {
@@ -22,21 +21,6 @@ export default class Paddle {
         document.addEventListener("keyup", event => {
             this.keyState[event.key] = false;
         });
-
-
-
-
-        // document.addEventListener("keydown", event => {
-        //     switch (event.key) {
-        //         case up:
-        //             this.up();
-        //             break;
-        //         case down:
-        //             this.down();
-        //             break;
-        //     }
-        // });
-
     }
 
     up() {
@@ -44,15 +28,12 @@ export default class Paddle {
             console.log('move up');
             this.y = this.y - this.speed;
         }
-        // this.y = Math.max(0, this.y - this.speed); /// another way to do it
     }
     down() {
         if (this.y < (this.boardHeight - this.height)) {
             console.log("move down");
             this.y = this.y + this.speed;
         }
-        // this.y = Math.min(this.y + this.speed, this.boardHeight - this.height);
-
     }
 
     render(svg) {

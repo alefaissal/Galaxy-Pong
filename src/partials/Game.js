@@ -85,16 +85,12 @@ export default class Game {
           } else {
             this.topScore = this.player2.score + 10;
           }
-
           break;
-
       }
     });
 
 
   }// end of constructor
-
-
 
   multiBall() {
     this.isMultiBall = true;                  // multiball
@@ -104,7 +100,6 @@ export default class Game {
     this.topScore = 100;
     console.log(this.multiBallArray);
   }
-
 
   showBallXY(ball) {
     ball = this.ball;
@@ -154,12 +149,6 @@ export default class Game {
           ball.render(svg, this.player1, this.player2);
         });
       }
-
-
     }
   }
-
-
-
-
 }
