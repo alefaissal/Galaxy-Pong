@@ -17,3 +17,6 @@ https://alefaissal.github.io/project2-pong/
 * Game is over when some one reaches 10 points
 * Space bar pause the game at any time
 
+![ScreenShot](screenshot01.png)
+![ScreenShot](screenshot02.png)
+![ScreenShot](screenshot03.png)
